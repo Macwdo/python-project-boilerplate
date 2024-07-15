@@ -1,0 +1,40 @@
+[tool.poetry]
+name = "delivery-app"
+version = "0.1.0"
+description = ""
+authors = ["macwdo <danilo.macedofernandes@hotmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+django = "^5.0.6"
+django-rest-framework = "^0.1.0"
+psycopg2-binary = "^2.9.9"
+mypy = "^1.10.1"
+ruff = "^0.5.0"
+pytest = "^8.2.2"
+django-pytest = "^0.2.0"
+pytest-django = "^4.8.0"
+coverage = "^7.5.4"
+django-stubs = {extras = ["compatible-mypy"], version = "^5.0.2"}
+taskipy = "^1.13.0"
+gunicorn = "^22.0.0"
+
+[tool.poetry.group.dev.dependencies]
+taskipy = "^1.13.0"
+
+[tool.taskipy.tasks]
+
+lint_check = "ruff check"
+lint_format = "ruff format & ruff check --fix"
+lint_unsafe = "ruff format & ruff check --unsafe-fixes --fix"
+
+test = "coverage run -m pytest"
+post_test = "coverage html"
+
+type_check = "mypy ."
+type_check_strict = "mypy . --strict"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
